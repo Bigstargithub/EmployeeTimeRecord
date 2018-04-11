@@ -15,9 +15,8 @@ public class TimeRecorder {
 		TimeRecorder myTimeRecoder = new TimeRecorder();
 		
 		myTimeRecoder.getData();
-		
-		myTimeRecoder.computeTotalPerWeekDay();
-		myTimeRecoder.computeTotalPerEmployee();
+
+		myTimeRecoder.computeTotals();
 		
 		myTimeRecoder.printResults();
 
@@ -28,7 +27,7 @@ public class TimeRecorder {
 		Scanner myScanner = new Scanner(System.in);
 		
 		System.out.print("How many employees do you want" +
-								"to process for their work time? ");
+								" to process for their work time? ");
 		
 		int numOfEmployees = myScanner.nextInt();
 		
@@ -49,28 +48,30 @@ public class TimeRecorder {
 		myScanner.close();	
 	}
 	
-	public void computeTotalPerWeekDay() {
+	public void computeTotals() 
+	{
 			
-		for(WeekDays currentDay:WeekDays.values()) {
+		for(WeekDays currentDay:WeekDays.values()) 
+		{
 			
 			dayHours[currentDay.ordinal()] = 0;
 			
-			for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {	
+			for(int employeeCount=0; employeeCount < hours.length; employeeCount++) 
+			{	
 				dayHours[currentDay.ordinal()] = dayHours[currentDay.ordinal()] 
 															+ hours[employeeCount][currentDay.ordinal()];
 			}
+		
 		}
-	}
 	
-	public void computeTotalPerEmployee() {
-		
 		weekHours = new int[hours.length];
-		
-		for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {
+		for(int employeeCount=0; employeeCount < hours.length; employeeCount++) 
+		{
 			
 			weekHours[employeeCount] = 0;
 		
-			for(WeekDays currentDay:WeekDays.values()) {
+			for(WeekDays currentDay:WeekDays.values()) 
+			{
 				weekHours[employeeCount] = weekHours[employeeCount] 
 															+ hours[employeeCount][currentDay.ordinal()];
 			}
@@ -105,9 +106,14 @@ public class TimeRecorder {
 		
 		// print total per employee
 		System.out.print("Total = " + addSpace("Total = ".length()));
+		int sum = 0;
 		for(int employeeCount = 0; employeeCount < hours.length; employeeCount++) {
 			System.out.print(weekHours[employeeCount] +"\t");
+			sum = sum + weekHours[employeeCount];
 		}
+		
+		    System.out.print(sum + "\t");
+		
 	}
 	
 	private String addSpace(int length) {
